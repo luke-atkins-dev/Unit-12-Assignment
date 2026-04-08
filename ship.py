@@ -12,7 +12,7 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from alien_invasion import AlienInvasion
-    from arsenal import Arsenal
+    from arsenal import ShipArsenal as Arsenal
     
 
 class Ship:
@@ -34,11 +34,12 @@ class Ship:
         self.moving_right = False
         self.moving_left = False
         self.x = float(self.rect.x)
+        self.arsenal = arsenal
     
     def draw(self) -> None:
         self.screen.blit(self.image, self.rect)
     
-    def update(self) -> None:
+    def update_ship_movement(self) -> None:
         speed = self.settings.ship_speed
         if self.moving_right and self.rect.right < self.boundaries.right:
             self.x += speed
