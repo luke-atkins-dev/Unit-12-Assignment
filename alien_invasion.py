@@ -24,6 +24,7 @@ class AlienInvasion:
         if not pygame.get_init():
             # No need to initialize pygame several times although this code will only be run once
             pygame.init()
+            pygame.mixer.init()
         
         self.screen = pygame.display.set_mode(
             self.settings.resolution
@@ -35,6 +36,8 @@ class AlienInvasion:
             self.bg,
             self.settings.resolution
         )
+        self.laser_sound = pygame.mixer.Sound(self.settings.laser_sound)
+        self.laser_sound.set_volume(self.settings.laser_volume)
         self.clock = pygame.time.Clock()
         self.running = False
         
@@ -68,6 +71,10 @@ class AlienInvasion:
             self.ship.moving_right = True
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = True
+        elif event.key == pygame.K_SPACE:
+            if self.ship.fire():
+                self.laser_sound.play()
+                self.laser_sound.fadeout(250)
         elif event.key == pygame.K_q:
             self.quit()
 

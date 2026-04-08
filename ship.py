@@ -37,9 +37,14 @@ class Ship:
         self.arsenal = arsenal
     
     def draw(self) -> None:
+        self.arsenal.draw()
         self.screen.blit(self.image, self.rect)
+
+    def update(self) -> None:
+        self._update_ship_movement()
+        self.arsenal.update_arsenal()
     
-    def update_ship_movement(self) -> None:
+    def _update_ship_movement(self) -> None:
         speed = self.settings.ship_speed
         if self.moving_right and self.rect.right < self.boundaries.right:
             self.x += speed
@@ -47,3 +52,6 @@ class Ship:
             self.x -= speed
         
         self.rect.x = self.x
+    
+    def fire(self) -> bool:
+        return self.arsenal.fire_bullet()
