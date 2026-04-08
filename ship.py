@@ -12,10 +12,11 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from alien_invasion import AlienInvasion
+    from arsenal import Arsenal
     
 
 class Ship:
-    def __init__(self, game: "AlienInvasion") -> None:
+    def __init__(self, game: "AlienInvasion", arsenal: "Arsenal") -> None:
         self.game = game
         self.settings = game.settings
         self.screen = game.screen
