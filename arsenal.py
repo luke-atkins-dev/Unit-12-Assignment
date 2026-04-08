@@ -10,6 +10,7 @@ class ShipArsenal:
         self.game = game
         self.settings = game.settings
         self.arsenal = pygame.sprite.Group()
+        self.boundaries = game.screen.get_rect()
     
     def update_arsenal(self) -> None:
         self.arsenal.update()
@@ -17,7 +18,7 @@ class ShipArsenal:
     
     def _remove_bullets_offscreen(self) -> None:
         for bullet in self.arsenal.copy():
-            if bullet.rect.bottom <= 0:
+            if bullet.rect.left > self.boundaries.right:
                 self.arsenal.remove(bullet)
 
     def draw(self) -> None:

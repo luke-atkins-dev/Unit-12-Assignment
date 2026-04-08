@@ -19,6 +19,15 @@ class AlienInvasion:
     handles pygame window, events, and game loop
     '''
     def __init__(self) -> None:
+        """
+        Initializes an instance of the Alien Invasion game
+
+        Args:
+            None
+
+        Returns:
+            None
+        """
         self.settings = Settings()
 
         if not pygame.get_init():
@@ -42,7 +51,14 @@ class AlienInvasion:
         self.running = False
         
         self.ship = Ship(self, ShipArsenal(self))
-    def _update_screen(self, dt: float):
+    def _update_screen(self):
+        """
+        (Private)
+
+        Draws background and ship
+
+
+        """
         self.screen.blit(self.bg, (0, 0))
         self.ship.draw()
         pygame.display.flip()
