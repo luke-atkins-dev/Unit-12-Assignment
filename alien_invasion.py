@@ -40,7 +40,7 @@ class AlienInvasion:
         self.ship = Ship(self)
     def _update_screen(self, dt: float):
         self.screen.blit(self.bg, (0, 0))
-        self.ship._update_screen()
+        self.ship.draw()
         pygame.display.flip()
 
     def run(self) -> None:
@@ -49,15 +49,33 @@ class AlienInvasion:
             self._check_events()
             
             dt = self.clock.tick(self.settings.FPS)
-
+            self.ship.update()
             self._update_screen(dt)
 
 
     def _check_events(self) -> None:
         for event in pygame.event.get():
-            if event == pygame.QUIT:
+            if event.type == pygame.QUIT:
                 self.quit()
-            
+            elif event.type == pygame.KEYDOWN:
+                self._check_keydown_event(event)
+            elif event.type == pygame.KEYUP:
+                self._check_keyup_event(event)
+    
+    def _check_keydown_event(self, event) -> None:
+        if event.key == pygame.K_RIGHT:
+            self.ship.moving_right = True
+        elif event.key == pygame.K_LEFT:
+            self.ship.moving_left = True
+        elif event.key == pygame.K_q:
+            self.quit()
+
+    def _check_keyup_event(self, event) -> None:
+        if event.key == pygame.K_RIGHT:
+            self.ship.moving_right = False
+        elif event.key == pygame.K_LEFT:
+            self.ship.moving_left = False
+
     def quit(self) -> None:
         """
         Stops main game loop and stops Python execution
