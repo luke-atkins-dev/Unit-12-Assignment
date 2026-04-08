@@ -51,20 +51,34 @@ class AlienInvasion:
         self.running = False
         
         self.ship = Ship(self, ShipArsenal(self))
-    def _update_screen(self):
+    def _update_screen(self) -> None:
         """
         (Private)
 
         Draws background and ship
 
+        Args:
+            None
 
+        Returns:
+            None
         """
         self.screen.blit(self.bg, (0, 0))
         self.ship.draw()
         pygame.display.flip()
 
     def run(self) -> None:
+        """
+        Creates and runs the main game loop
+
+        Args:
+            None
+
+        Returns:
+            None
+        """
         self.running = True
+
         while self.running:
             self._check_events()
             
@@ -74,6 +88,17 @@ class AlienInvasion:
 
 
     def _check_events(self) -> None:
+        """
+        (Private)
+
+        Checks key and quit events
+
+        Args:
+            None
+
+        Returns:
+            None
+        """
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.quit()
@@ -83,6 +108,17 @@ class AlienInvasion:
                 self._check_keyup_event(event)
     
     def _check_keydown_event(self, event) -> None:
+        """
+        (Private)
+
+        Handles all keydown events
+
+        Args:
+            event: (pygame.event.Event) the event to be processed
+        
+        Returns:
+            None
+        """
         if event.key == pygame.K_RIGHT:
             self.ship.moving_up = True
         elif event.key == pygame.K_LEFT:
@@ -95,6 +131,17 @@ class AlienInvasion:
             self.quit()
 
     def _check_keyup_event(self, event) -> None:
+        """
+        (Private)
+
+        Handles all keyup events
+
+        Args:
+            event: (pygame.event.Event) the event to be processed
+        
+        Returns:
+            None
+        """
         if event.key == pygame.K_RIGHT:
             self.ship.moving_up = False
         elif event.key == pygame.K_LEFT:
@@ -103,6 +150,12 @@ class AlienInvasion:
     def quit(self) -> None:
         """
         Stops main game loop and stops Python execution
+
+        Args:
+            None
+
+        Returns:
+            None
         """
         self.running = False
         pygame.quit()
