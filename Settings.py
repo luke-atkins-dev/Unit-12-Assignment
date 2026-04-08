@@ -13,6 +13,9 @@ class Settings:
     Stores settings and paths to image files
     """
     def __init__(self) -> None:
+        """
+        Initializes all constants and path objects
+        """
         self.name: str = "Alien Invasion"
         self.screen_w: int = 1200
         self.screen_h: int = 800
