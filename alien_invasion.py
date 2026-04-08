@@ -38,22 +38,25 @@ class AlienInvasion:
         self.running = False
 
         self.ship = Ship(self)
-    def render(self, dt: float):
+    def _update_screen(self, dt: float):
         self.screen.blit(self.bg, (0, 0))
-        self.ship.draw()
+        self.ship._update_screen()
+        pygame.display.flip()
 
     def run(self) -> None:
         self.running = True
         while self.running:
-            for event in pygame.event.get():
-                if event == pygame.QUIT:
-                    self.quit()
+            self._check_events()
             
             dt = self.clock.tick(self.settings.FPS)
 
-            self.render(dt)
+            self._update_screen(dt)
 
-            pygame.display.flip()
+
+    def _check_events(self) -> None:
+        for event in pygame.event.get():
+            if event == pygame.QUIT:
+                self.quit()
             
     def quit(self) -> None:
         """
