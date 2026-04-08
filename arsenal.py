@@ -75,7 +75,7 @@ class ShipArsenal:
             None
 
         Returns:
-            None
+            bool: whether the bullet was able to fire
         """
         if len(self.arsenal) < self.settings.bullet_amount:
             new_bullet = Bullet(self.game)
