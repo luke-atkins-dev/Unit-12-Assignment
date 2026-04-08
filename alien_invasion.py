@@ -35,18 +35,22 @@ class AlienInvasion:
         )
         self.clock = pygame.time.Clock()
         self.running = False
-    
+    def render(self, dt: float):
+        self.screen.blit(self.bg, (0, 0))
+
     def run(self) -> None:
         self.running = True
-
         while self.running:
             for event in pygame.event.get():
-                if event == pygame.quit:
+                if event == pygame.QUIT:
                     self.quit()
             
             dt = self.clock.tick(self.settings.FPS)
 
+            self.render(dt)
+
             pygame.display.flip()
+            
     def quit(self) -> None:
         """
         Stops main game loop and stops Python execution
@@ -56,4 +60,4 @@ class AlienInvasion:
         sys.exit()
 
 if __name__ == '__main__':
-    AlienInvasion()
+    AlienInvasion().run()
