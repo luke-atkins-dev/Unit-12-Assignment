@@ -1,3 +1,11 @@
+'''
+Name: bullet.py
+Author: Luke Atkins
+Purpose: Handles bullet drawing and movement code
+Starter Code: No starter code used
+Date: 4/7/2026
+'''
+
 
 import pygame
 from pygame.sprite import Sprite

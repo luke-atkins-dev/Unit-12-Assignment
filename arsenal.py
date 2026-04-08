@@ -1,3 +1,11 @@
+'''
+Name: arsenal.py
+Author: Luke Atkins
+Purpose: Contains class for limiting the bullet count to the config and deleting bullets off screen
+Starter Code: No starter code used
+Date: 4/7/2026
+'''
+
 import pygame
 from typing import TYPE_CHECKING
 from bullet import Bullet
