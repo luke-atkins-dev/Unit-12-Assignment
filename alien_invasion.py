@@ -6,6 +6,7 @@ Starter Code: No starter code used
 Date: 4/7/2026
 '''
 
+from Settings import Settings
 import sys
 import pygame
 
@@ -15,41 +16,44 @@ class AlienInvasion:
 
     handles pygame window, events, and game loop
     '''
-    FPS = 60
     def __init__(self) -> None:
-        self.display_info = pygame.display.Info()
+        self.settings = Settings()
 
         if not pygame.get_init():
             # No need to initialize pygame several times although this code will only be run once
             pygame.init()
         
         self.screen = pygame.display.set_mode(
-            self._get_desired_window_resolution()
+            self.settings.resolution
         )
-        pygame.display.set_caption("Alien Invasion")
+        pygame.display.set_caption(self.settings.name)
 
+        self.bg = pygame.image.load(self.settings.bg_file)
+        self.bg = pygame.transform.scale(
+            self.bg,
+            self.settings.resolution
+        )
         self.clock = pygame.time.Clock()
-
         self.running = False
-
-    def _get_desired_window_resolution(self) -> tuple[int, int]:
-        display_info = self.display_info
-
-        return (display_info.current_h, display_info.current_w)
+    
     def run(self) -> None:
         self.running = True
 
         while self.running:
             for event in pygame.event.get():
                 if event == pygame.quit:
-                    pygame.quit()
-                    sys.exit()
+                    self.quit()
             
-            dt = self.clock.tick(60)
+            dt = self.clock.tick(self.settings.FPS)
 
             pygame.display.flip()
-
-            
+    def quit(self) -> None:
+        """
+        Stops main game loop and stops Python execution
+        """
+        self.running = False
+        pygame.quit()
+        sys.exit()
 
 if __name__ == '__main__':
     AlienInvasion()
