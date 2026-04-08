@@ -28,12 +28,16 @@ class Ship:
             self.image,
             (self.settings.ship_w, self.settings.ship_h)
         )
+        self.image = pygame.transform.rotate(
+            self.image,
+            -90
+        )
         self.rect = self.image.get_rect()
-        self.rect.midbottom = self.boundaries.midbottom
+        self.rect.midleft = self.boundaries.midleft
 
-        self.moving_right = False
-        self.moving_left = False
-        self.x = float(self.rect.x)
+        self.moving_up = False
+        self.moving_down = False
+        self.y = float(self.rect.y)
         self.arsenal = arsenal
     
     def draw(self) -> None:
@@ -46,12 +50,13 @@ class Ship:
     
     def _update_ship_movement(self) -> None:
         speed = self.settings.ship_speed
-        if self.moving_right and self.rect.right < self.boundaries.right:
-            self.x += speed
-        if self.moving_left and self.rect.left > self.boundaries.left:
-            self.x -= speed
+        print(self.rect.top, self.boundaries.top)
+        if self.moving_up and self.rect.bottom < self.boundaries.bottom:
+            self.y += speed
+        if self.moving_down and self.rect.top > self.boundaries.top:
+            self.y -= speed
         
-        self.rect.x = self.x
+        self.rect.y = self.y
     
     def fire(self) -> bool:
         return self.arsenal.fire_bullet()
