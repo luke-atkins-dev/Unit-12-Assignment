@@ -15,6 +15,7 @@ class AlienInvasion:
 
     handles pygame window, events, and game loop
     '''
+    FPS = 60
     def __init__(self) -> None:
         self.display_info = pygame.display.Info()
 
@@ -26,6 +27,9 @@ class AlienInvasion:
             self._get_desired_window_resolution()
         )
         pygame.display.set_caption("Alien Invasion")
+
+        self.clock = pygame.time.Clock()
+
         self.running = False
 
     def _get_desired_window_resolution(self) -> tuple[int, int]:
@@ -41,7 +45,10 @@ class AlienInvasion:
                     pygame.quit()
                     sys.exit()
             
+            dt = self.clock.tick(60)
+
             pygame.display.flip()
+
             
 
 if __name__ == '__main__':
