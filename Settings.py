@@ -1,5 +1,13 @@
 from pathlib import Path
 
+'''
+Name: alien_invasion.py
+Author: Luke Atkins
+Purpose: Manages game config and source files
+Starter Code: No starter code used
+Date: 4/7/2026
+'''
+
 class Settings:
     """
     Stores settings and paths to image files

@@ -9,6 +9,7 @@ Date: 4/7/2026
 from Settings import Settings
 import sys
 import pygame
+from ship import Ship
 
 class AlienInvasion:
     '''
@@ -35,8 +36,11 @@ class AlienInvasion:
         )
         self.clock = pygame.time.Clock()
         self.running = False
+
+        self.ship = Ship(self)
     def render(self, dt: float):
         self.screen.blit(self.bg, (0, 0))
+        self.ship.draw()
 
     def run(self) -> None:
         self.running = True
