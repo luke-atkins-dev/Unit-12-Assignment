@@ -15,9 +15,8 @@ class AlienInvasion:
 
     handles pygame window, events, and game loop
     '''
-    def __init__(self):
+    def __init__(self) -> None:
         self.display_info = pygame.display.Info()
-        
 
         if not pygame.get_init():
             # No need to initialize pygame several times although this code will only be run once
@@ -26,12 +25,24 @@ class AlienInvasion:
         self.screen = pygame.display.set_mode(
             self._get_desired_window_resolution()
         )
+        pygame.display.set_caption("Alien Invasion")
+        self.running = False
+
     def _get_desired_window_resolution(self) -> tuple[int, int]:
         display_info = self.display_info
 
         return (display_info.current_h, display_info.current_w)
-    def run() -> None:
-        pass
+    def run(self) -> None:
+        self.running = True
+
+        while self.running:
+            for event in pygame.event.get():
+                if event == pygame.quit:
+                    pygame.quit()
+                    sys.exit()
+            
+            pygame.display.flip()
+            
 
 if __name__ == '__main__':
-    pass
+    AlienInvasion()
