@@ -84,7 +84,7 @@ class AlienInvasion:
             
             dt = self.clock.tick(self.settings.FPS)
             self.ship.update()
-            self._update_screen(dt)
+            self._update_screen()
 
 
     def _check_events(self) -> None:
