@@ -40,4 +40,4 @@ class Settings:
         self.alien_file = project / "Assets" / "images" / "enemy_4.png"
         self.alien_w = 40
         self.alien_h = 40
-        self.fleet_speed = 5
+        self.fleet_speed = 2
