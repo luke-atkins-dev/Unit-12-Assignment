@@ -88,7 +88,7 @@ class AlienInvasion:
             
             dt = self.clock.tick(self.settings.FPS)
             self.ship.update()
-            self.alien_fleet.update()
+            # self.alien_fleet.update()
             # self.alien.update()
             self._update_screen()
 

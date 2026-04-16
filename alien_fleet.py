@@ -19,20 +19,26 @@ class AlienFleet():
 
     def create_fleet(self):
         alien_w = self.settings.alien_w
+        alien_h = self.settings.alien_h
         screen_w = self.settings.screen_w
+        screen_h = self.settings.screen_h
 
-        fleet_w = AlienFleet.calculate_fleet_width(alien_w, screen_w)
+        fleet_w, fleet_h = AlienFleet.calculate_fleet_size(alien_w, screen_w, alien_h, screen_h)
         fleet_horizonal_space = fleet_w * alien_w
+        fleet_vertical_space = fleet_h * alien_w
 
-        x_offset = (screen_w - fleet_horizonal_space) // 2
+        x_offset = int((screen_w - fleet_horizonal_space) // 2)
+        y_offset = int((screen_h - fleet_vertical_space) // 2)
 
-        for col in range(fleet_w):
-            current_x = alien_w * col + x_offset
+        for row in range(fleet_h):
+            for col in range(fleet_w):
+                current_x = alien_w * col + x_offset
+                current_y = alien_h * row + y_offset
+                # current_y = alien_h * col 
+                if col % 2 == 0 or row % 2 == 0:
+                    continue
 
-            if col % 2 == 0:
-                continue
-
-            self._create_alien(current_x, 10)
+                self._create_alien(current_x, current_y)
     
     def update(self):
         alien: "Alien"
@@ -40,16 +46,22 @@ class AlienFleet():
             alien.update()
 
 
-    def calculate_fleet_width(alien_w: float, screen_w: float) -> float:
+    def calculate_fleet_size(alien_w: float, screen_w: float, alien_h: float, screen_h: float) -> float:
         # in the video it makes this an instance method but it does not need to be
         fleet_w = (screen_w//alien_w)
+        fleet_h = (screen_h//alien_h)
 
         if fleet_w % 2 == 0:
             fleet_w -= 1
         else:
             fleet_w -= 2
         
-        return fleet_w
+        if fleet_h % 2 == 0:
+            fleet_h -= 1
+        else:
+            fleet_h -= 2
+        
+        return int(fleet_w), int(fleet_h)
     
     def _create_alien(self, current_x: int, current_y: int):
         new_alien = Alien(self, current_x, current_y)
