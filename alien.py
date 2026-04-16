@@ -12,13 +12,13 @@ from pygame.sprite import Sprite
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from alien_invasion import AlienInvasion
+    from alien_fleet import AlienFleet
 
 class Alien(Sprite):
     """
     The main bullet type within the game
     """
-    def __init__(self, game: "AlienInvasion", x: float, y: float) -> None:
+    def __init__(self, alien_fleet: "AlienFleet", x: float, y: float) -> None:
         """
         Creates and returns instance of bullet
 
@@ -29,10 +29,10 @@ class Alien(Sprite):
             None
         """
         super().__init__()
-        self.game = game
-        self.screen = game.screen
-        self.settings = game.settings
-        self.boundaries = game.screen.get_rect()
+        self.fleet = alien_fleet
+        self.screen = alien_fleet.screen
+        self.settings = alien_fleet.settings
+        self.boundaries = alien_fleet.screen.get_rect()
 
         self.image = pygame.image.load(
             self.settings.alien_file
@@ -72,7 +72,7 @@ class Alien(Sprite):
 
 
         self.x += temp_speed * self.settings.fleet_direction
-        
+
         self.rect.x = self.x
         self.rect.y = self.y
 
