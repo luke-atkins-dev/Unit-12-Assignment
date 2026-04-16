@@ -27,8 +27,8 @@ class AlienFleet():
 
         x_offset, y_offset = self.extract_offsets(alien_w, screen_w, fleet_w, fleet_h)
 
-        if level == 1:
-            pass
+        # if level == 1:
+            # pass
         self._create_rectangle_fleet(alien_w, alien_h, fleet_w, fleet_h, x_offset, y_offset)
 
     def _create_rectangle_fleet(self, alien_w, alien_h, fleet_w, fleet_h, x_offset, y_offset):
@@ -52,11 +52,26 @@ class AlienFleet():
         
         return x_offset,y_offset
     
-    def update(self):
+    def update_fleet(self):
+        alien: "Alien"
+
+        self._check_fleet_edges()
+
+        for alien in self.fleet:
+            self.fleet.update()
+
+    def _check_fleet_edges(self):
         alien: "Alien"
         for alien in self.fleet:
-            alien.update()
+            if alien.check_edges():
+                print('drop edges')
+                self._drop_alien_fleet()
+                self.fleet_direction *= -1
+                break
 
+    def _drop_alien_fleet(self):
+        for alien in self.fleet:
+            alien.y += self.fleet_drop_speed
 
     def calculate_fleet_size(alien_w: float, screen_w: float, alien_h: float, screen_h: float) -> float:
         # in the video it makes this an instance method but it does not need to be

@@ -9,6 +9,7 @@ Date: 4/7/2026
 import pygame
 from Settings import Settings
 from typing import TYPE_CHECKING
+from pygame.sprite import Group, spritecollideany
 
 if TYPE_CHECKING:
     from alien_invasion import AlienInvasion
@@ -42,12 +43,15 @@ class Ship:
             -90
         )
         self.rect = self.image.get_rect()
-        self.rect.midleft = self.boundaries.midleft
+        self._center_ship()
 
         self.moving_up = False
         self.moving_down = False
-        self.y = float(self.rect.y)
         self.arsenal = arsenal
+
+    def _center_ship(self):
+        self.rect.midleft = self.boundaries.midleft
+        self.y = float(self.rect.y)
     
     def draw(self) -> None:
         """
@@ -74,7 +78,7 @@ class Ship:
         """
         self._update_ship_movement()
         self.arsenal.update_arsenal()
-    
+        
     def _update_ship_movement(self) -> None:
         """
         (Private)
@@ -106,3 +110,11 @@ class Ship:
             bool: whether the bullet was able to fire
         """
         return self.arsenal.fire_bullet()
+
+    def check_collisions(self, other_group: Group):
+        did_collide = spritecollideany(self, other_group)
+            
+        if did_collide:
+            self._center_ship()
+        
+        return did_collide

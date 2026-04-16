@@ -88,10 +88,18 @@ class AlienInvasion:
             
             dt = self.clock.tick(self.settings.FPS)
             self.ship.update()
-            # self.alien_fleet.update()
-            # self.alien.update()
+            self.alien_fleet.update_fleet()
             self._update_screen()
+            self._check_collisions()
 
+    def _check_collisions(self):
+        if self.ship.check_collisions(self.alien_fleet.fleet):
+            self._reset_level()
+
+    def _reset_level(self):
+        self.ship.arsenal.arsenal.empty()
+        self.alien_fleet.fleet.empty()
+        self.alien_fleet.create_fleet()
 
     def _check_events(self) -> None:
         """
