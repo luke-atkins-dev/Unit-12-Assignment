@@ -51,6 +51,7 @@ class AlienInvasion:
         self.laser_sound.set_volume(self.settings.laser_volume)
         self.clock = pygame.time.Clock()
         self.running = False
+        self.game_active = False
         
         self.ship = Ship(self, ShipArsenal(self))
         self.alien_fleet = AlienFleet(self)
@@ -71,7 +72,14 @@ class AlienInvasion:
         self.screen.blit(self.bg, (0, 0))
         self.ship.draw()
         self.alien_fleet.draw()
-        self.play_button.draw()
+
+        if not self.game_active:
+            self.play_button.draw()
+            pygame.mouse.set_visible(True)
+        else:
+            pygame.mouse.set_visible(False)
+
+
         pygame.display.flip()
 
     def run(self) -> None:
@@ -147,6 +155,13 @@ class AlienInvasion:
                 self._check_keydown_event(event)
             elif event.type == pygame.KEYUP:
                 self._check_keyup_event(event)
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                self._check_button_clicked()
+
+    def _check_button_clicked(self):
+        mouse_pos = pygame.mouse.get_pos()
+        if self.play_button.check_clicked(mouse_pos):
+            self.restart_game()
     
     def _check_keydown_event(self, event) -> None:
         """
