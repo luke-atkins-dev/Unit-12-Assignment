@@ -33,7 +33,16 @@ class ShipArsenal:
         self.arsenal = pygame.sprite.Group()
         self.boundaries = game.screen.get_rect()
     
-    def _check_colliding_enemies(self):
+    def _check_colliding_enemies(self) -> None:
+        """
+        Checks if bullet sprite group collides with enemy sprite group and removes any bullet or enemy that does collide
+
+        Args:
+            None
+
+        Returns:
+            None
+        """
         fleet = self.game.alien_fleet.fleet
         pygame.sprite.groupcollide(
             self.arsenal,
