@@ -92,7 +92,7 @@ class AlienInvasion:
             self._update_screen()
             self._check_collisions()
 
-    def _check_collisions(self):
+    def _check_collisions(self) -> None:
         """
         Checks whether the fleet has passed the player or an alien is colliding with the player
 
@@ -107,7 +107,7 @@ class AlienInvasion:
         if ship_hit_fleet or fleet_passed_player:
             self._reset_level()
         
-    def _reset_level(self):
+    def _reset_level(self) -> None:
         """
         Resets the game state
 
