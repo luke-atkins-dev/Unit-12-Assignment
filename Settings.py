@@ -27,6 +27,7 @@ class Settings:
         self.ship_file: Path = project / "Assets" / "images" / "ship2(no bg).png"
         self.ship_w = 40
         self.ship_h = 60
+        self.difficulty_scale = 1.1
 
         self.bullet_file = project / "Assets" / "images" / "laserBlast.png"
         self.laser_sound = project / "Assets" / "sound" / "laser.mp3"
@@ -55,3 +56,6 @@ class Settings:
         self.bullet_w = 25
         self.bullet_h = 80
         self.starting_ship_count = 3
+    
+    def increase_difficulty(self):
+        self.ship_speed *= self.difficulty_scale
