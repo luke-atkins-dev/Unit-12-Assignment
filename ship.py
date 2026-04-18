@@ -134,6 +134,7 @@ class Ship:
         did_collide = spritecollideany(self, other_group)
             
         if did_collide:
+            # life lost
             self._center_ship()
         
         return did_collide

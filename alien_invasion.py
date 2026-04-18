@@ -69,16 +69,13 @@ class AlienInvasion:
         Returns:
             None
         """
+
         self.screen.blit(self.bg, (0, 0))
         self.ship.draw()
         self.alien_fleet.draw()
 
         if not self.game_active:
             self.play_button.draw()
-            pygame.mouse.set_visible(True)
-        else:
-            pygame.mouse.set_visible(False)
-
 
         pygame.display.flip()
 
@@ -101,11 +98,13 @@ class AlienInvasion:
             # print(dt_ms)
             # this is done because the delta time is returned in milliseconds so we are converting to seconds
             dt = dt_ms / 1000
-            self.ship.update(dt)
-            self.alien_fleet.update_fleet(dt)
+            
             self._update_screen()
 
-            self._check_collisions()
+            if self.game_active:
+                self.ship.update(dt)
+                self.alien_fleet.update_fleet(dt)
+                self._check_collisions()
 
     def _check_collisions(self) -> None:
         """
@@ -157,6 +156,12 @@ class AlienInvasion:
                 self._check_keyup_event(event)
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 self._check_button_clicked()
+
+    def restart_game(self):
+        self.game_active = True
+        pygame.mouse.set_visible(False)
+        self._reset_level()
+        self.ship._center_ship()
 
     def _check_button_clicked(self):
         mouse_pos = pygame.mouse.get_pos()
