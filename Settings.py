@@ -43,3 +43,4 @@ class Settings:
         self.fleet_speed = 0.08
         self.fleet_direction = 1
         self.fleet_drop_speed = 40
+        self.fleet_product = 0.65
