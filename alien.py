@@ -77,7 +77,6 @@ class Alien(Sprite):
         self.rect.y = self.y
 
     def check_edges(self):
-        print(f'{self.boundaries.top=}\n{self.boundaries.bottom}')
         return (self.rect.bottom >= self.boundaries.bottom or self.rect.top <= self.boundaries.top)
     
     def draw_alien(self) -> None:

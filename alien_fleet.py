@@ -26,10 +26,6 @@ class AlienFleet():
         fleet_w, fleet_h = AlienFleet.calculate_fleet_size(alien_w, screen_w, alien_h, screen_h)
         
         x_offset, y_offset = self.extract_offsets(alien_w, screen_w, fleet_w, fleet_h)
-        print(f'{fleet_w=}, {fleet_h=}')
-        print(f'y offset 2 = {y_offset}')
-        # if level == 1:
-            # pass
         self._create_rectangle_fleet(alien_w, alien_h, fleet_w, fleet_h, x_offset, y_offset)
 
     def _create_rectangle_fleet(self, alien_w, alien_h, fleet_w, fleet_h, x_offset, y_offset):
@@ -39,13 +35,10 @@ class AlienFleet():
 
                 current_x = alien_w * col + x_offset
                 current_y = alien_h * row + y_offset
-                if col == 1 and row == 1:
-                    print(f'{y_offset=}')
-                # current_y = alien_h * col 
+                
                 if col % 2 == 0 or row % 2 == 0:
                     continue
-                # if row == 1 and col == 1:
-                #     print('first alien position: ', current_x, current_y)
+
                 self._create_alien(current_x, current_y)
 
     def extract_offsets(self, alien_w, screen_w, fleet_w, fleet_h):
@@ -69,7 +62,6 @@ class AlienFleet():
         alien: "Alien"
         for alien in self.fleet:
             if alien.check_edges():
-                print('drop edges')
                 self._drop_alien_fleet()
                 self.fleet_direction *= -1
                 break

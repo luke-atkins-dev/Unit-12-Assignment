@@ -33,6 +33,15 @@ class ShipArsenal:
         self.arsenal = pygame.sprite.Group()
         self.boundaries = game.screen.get_rect()
     
+    def _check_colliding_enemies(self):
+        fleet = self.game.alien_fleet.fleet
+        pygame.sprite.groupcollide(
+            self.arsenal,
+            fleet,
+            True,
+            True
+        )
+    
     def update_arsenal(self) -> None:
         """
         Updates the arsenal for each frame.
@@ -45,6 +54,7 @@ class ShipArsenal:
         """
         self.arsenal.update()
         self._remove_bullets_offscreen()
+        self._check_colliding_enemies()
     
     def _remove_bullets_offscreen(self) -> None:
         """
