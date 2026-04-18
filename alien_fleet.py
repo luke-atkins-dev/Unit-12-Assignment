@@ -24,9 +24,10 @@ class AlienFleet():
         screen_h = self.settings.screen_h
 
         fleet_w, fleet_h = AlienFleet.calculate_fleet_size(alien_w, screen_w, alien_h, screen_h)
-
+        
         x_offset, y_offset = self.extract_offsets(alien_w, screen_w, fleet_w, fleet_h)
-
+        print(f'{fleet_w=}, {fleet_h=}')
+        print(f'y offset 2 = {y_offset}')
         # if level == 1:
             # pass
         self._create_rectangle_fleet(alien_w, alien_h, fleet_w, fleet_h, x_offset, y_offset)
@@ -34,23 +35,27 @@ class AlienFleet():
     def _create_rectangle_fleet(self, alien_w, alien_h, fleet_w, fleet_h, x_offset, y_offset):
         for row in range(fleet_h):
             for col in range(fleet_w):
+                
+
                 current_x = alien_w * col + x_offset
                 current_y = alien_h * row + y_offset
+                if col == 1 and row == 1:
+                    print(f'{y_offset=}')
                 # current_y = alien_h * col 
                 if col % 2 == 0 or row % 2 == 0:
                     continue
-
+                # if row == 1 and col == 1:
+                #     print('first alien position: ', current_x, current_y)
                 self._create_alien(current_x, current_y)
 
     def extract_offsets(self, alien_w, screen_w, fleet_w, fleet_h):
-        half_screen = self.settings.screen_h//2
         fleet_horizonal_space = fleet_w * alien_w
         fleet_vertical_space = fleet_h * alien_w
 
-        x_offset = int((screen_w - fleet_horizonal_space) // 2)
-        y_offset = int((half_screen - fleet_vertical_space) // 2)
+        x_offset = int((screen_w - (fleet_horizonal_space//2)) // 2)
+        y_offset = int((self.settings.screen_h - fleet_vertical_space) // 2)
         
-        return x_offset,y_offset
+        return x_offset, y_offset
     
     def update_fleet(self):
         alien: "Alien"
@@ -75,7 +80,7 @@ class AlienFleet():
 
     def calculate_fleet_size(alien_w: float, screen_w: float, alien_h: float, screen_h: float) -> float:
         # in the video it makes this an instance method but it does not need to be
-        fleet_w = (screen_w//alien_w)
+        fleet_w = (screen_w//alien_w) // 1.5
         fleet_h = (screen_h//alien_h)
 
         if fleet_w % 2 == 0:
