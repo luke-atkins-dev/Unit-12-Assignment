@@ -150,9 +150,9 @@ class AlienInvasion:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.quit()
-            elif event.type == pygame.KEYDOWN:
+            elif event.type == pygame.KEYDOWN and self.game_active:
                 self._check_keydown_event(event)
-            elif event.type == pygame.KEYUP:
+            elif event.type == pygame.KEYUP and self.game_active:
                 self._check_keyup_event(event)
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 self._check_button_clicked()
