@@ -47,7 +47,6 @@ class Alien(Sprite):
         )
 
         self.rect = self.image.get_rect()
-        # self.rect.midright = game.ship.rect.midright
         self.rect.x = x
         self.rect.y = y
 

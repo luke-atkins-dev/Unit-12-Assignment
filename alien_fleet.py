@@ -35,7 +35,7 @@ class AlienFleet():
 
                 current_x = alien_w * col + x_offset
                 current_y = alien_h * row + y_offset
-                
+
                 if col % 2 == 0 or row % 2 == 0:
                     continue
 
@@ -66,13 +66,20 @@ class AlienFleet():
                 self.fleet_direction *= -1
                 break
 
+    def has_fleet_passed_player(self, player: pygame.sprite.Sprite) -> bool:
+        alien: "Alien"
+        for alien in self.fleet:
+            if alien.x <= player.x:
+                return True
+
     def _drop_alien_fleet(self):
         for alien in self.fleet:
             alien.x -= self.fleet_drop_speed
 
     def calculate_fleet_size(alien_w: float, screen_w: float, alien_h: float, screen_h: float) -> float:
         # in the video it makes this an instance method but it does not need to be
-        fleet_w = (screen_w//alien_w) // 1.5
+        fleet_divisor = 1.5
+        fleet_w = (screen_w//alien_w) // fleet_divisor
         fleet_h = (screen_h//alien_h)
 
         if fleet_w % 2 == 0:

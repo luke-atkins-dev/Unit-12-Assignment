@@ -52,6 +52,7 @@ class Ship:
     def _center_ship(self):
         self.rect.midleft = self.boundaries.midleft
         self.y = float(self.rect.y)
+        self.x = self.rect.x
     
     def draw(self) -> None:
         """
