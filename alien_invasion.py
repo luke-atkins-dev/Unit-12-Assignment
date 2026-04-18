@@ -31,6 +31,7 @@ class AlienInvasion:
             None
         """
         self.settings = Settings()
+        self.settings.initialize_dynamic_settings()
 
         if not pygame.get_init():
             # No need to initialize pygame several times although this code will only be run once

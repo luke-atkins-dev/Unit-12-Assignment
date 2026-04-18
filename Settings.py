@@ -27,23 +27,16 @@ class Settings:
         self.ship_file: Path = project / "Assets" / "images" / "ship2(no bg).png"
         self.ship_w = 40
         self.ship_h = 60
-        self.ship_speed = 200
 
         self.bullet_file = project / "Assets" / "images" / "laserBlast.png"
         self.laser_sound = project / "Assets" / "sound" / "laser.mp3"
         self.laser_volume = 0.5
         self.bullet_speed = 200
-        self.bullet_w = 25
-        self.bullet_h = 80
-        self.bullet_amount = 5
 
         self.alien_file = project / "Assets" / "images" / "enemy_4.png"
         self.alien_w = 40
         self.alien_h = 40
-        self.fleet_speed = 1
         self.fleet_direction = 1
-        self.fleet_drop_speed = 40
-        self.fleet_product = 0.65
 
         self.button_w = 200
         self.button_h = 50
@@ -52,3 +45,13 @@ class Settings:
         self.button_font_size = 48
         self.text_color = (255, 255, 255)
         self.HUD_font_size = 20
+
+    def initialize_dynamic_settings(self):
+        self.fleet_speed = 1
+        self.fleet_drop_speed = 40
+        self.fleet_product = 0.65
+        self.bullet_amount = 5
+        self.ship_speed = 200
+        self.bullet_w = 25
+        self.bullet_h = 80
+        self.starting_ship_count = 3
