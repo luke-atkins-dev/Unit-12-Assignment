@@ -75,7 +75,7 @@ class Ship:
         self.arsenal.draw()
         self.screen.blit(self.image, self.rect)
 
-    def update(self) -> None:
+    def update(self, delta: float) -> None:
         """
         Updates the ships movement and arsenal
 
@@ -85,26 +85,26 @@ class Ship:
         Returns:
             None
         """
-        self._update_ship_movement()
-        self.arsenal.update_arsenal()
+        self._update_ship_movement(delta)
+        self.arsenal.update_arsenal(delta)
         
-    def _update_ship_movement(self) -> None:
+    def _update_ship_movement(self, delta: float) -> None:
         """
         (Private)
 
         Updates the ship's movement
 
         Args:
-            None
+            delta: the amount of time that has passed since the last frame (seconds)
 
         Returns:
             None
         """
         speed = self.settings.ship_speed
         if self.moving_up and self.rect.bottom < self.boundaries.bottom:
-            self.y += speed
+            self.y += speed * delta
         if self.moving_down and self.rect.top > self.boundaries.top:
-            self.y -= speed
+            self.y -= speed * delta
         
         self.rect.y = self.y
         self.x = self.rect.x

@@ -53,24 +53,19 @@ class Alien(Sprite):
         self.x = float(self.rect.x)
         self.y = float(self.rect.y)
     
-    def update(self) -> None:
+    def update(self, delta: float) -> None:
         """
         Updates the position of the alien
 
         Args:
-            None
+            delta: the amount of time that has passed since the last frame (seconds)
 
         Returns:
             None
         """
         temp_speed = self.settings.fleet_speed
 
-        # if self.check_edges():
-            # self.settings.fleet_direction *= -1
-            # self.y += self.settings.fleet_drop_speed
-
-
-        self.y += temp_speed * self.fleet.fleet_direction
+        self.y += temp_speed * self.fleet.fleet_direction * delta
 
         self.rect.x = self.x
         self.rect.y = self.y

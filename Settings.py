@@ -27,7 +27,7 @@ class Settings:
         self.ship_file: Path = project / "Assets" / "images" / "ship2(no bg).png"
         self.ship_w = 40
         self.ship_h = 60
-        self.ship_speed = 5
+        self.ship_speed = 200
 
         self.bullet_file = project / "Assets" / "images" / "laserBlast.png"
         self.laser_sound = project / "Assets" / "sound" / "laser.mp3"
@@ -40,7 +40,7 @@ class Settings:
         self.alien_file = project / "Assets" / "images" / "enemy_4.png"
         self.alien_w = 40
         self.alien_h = 40
-        self.fleet_speed = 0.08
+        self.fleet_speed = 1
         self.fleet_direction = 1
         self.fleet_drop_speed = 40
         self.fleet_product = 0.65

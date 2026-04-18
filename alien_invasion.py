@@ -86,10 +86,14 @@ class AlienInvasion:
         while self.running:
             self._check_events()
             
-            dt = self.clock.tick(self.settings.FPS)
-            self.ship.update()
-            self.alien_fleet.update_fleet()
+            dt_ms = self.clock.tick(self.settings.FPS)
+            # print(dt_ms)
+            # this is done because the delta time is returned in milliseconds so we are converting to seconds
+            dt = dt_ms / 1000
+            self.ship.update(dt)
+            self.alien_fleet.update_fleet(dt)
             self._update_screen()
+
             self._check_collisions()
 
     def _check_collisions(self) -> None:

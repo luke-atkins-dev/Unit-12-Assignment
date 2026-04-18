@@ -49,17 +49,17 @@ class Bullet(Sprite):
         self.rect.midright = game.ship.rect.midright
         self.x = float(self.rect.x)
     
-    def update(self) -> None:
+    def update(self, delta: float) -> None:
         """
         Updates the position of the bullet
 
         Args:
-            None
+            delta: the amount of time that has passed since the last frame (seconds)
 
         Returns:
             None
         """
-        self.x += self.settings.bullet_speed
+        self.x += self.settings.bullet_speed * delta
         self.rect.x = self.x
     
     def draw_bullet(self) -> None:

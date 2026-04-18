@@ -100,12 +100,12 @@ class AlienFleet():
         
         return x_offset, y_offset
     
-    def update_fleet(self) -> None:
+    def update_fleet(self, delta: float) -> None:
         """
         Updates sprite group and checks if sprites are colliding with top/bottom of screen
 
         Args:
-            None
+            delta: the amount of time that has passed since the last frame (seconds)
 
         Returns:
             None
@@ -115,7 +115,7 @@ class AlienFleet():
         self._check_fleet_edges()
 
         for alien in self.fleet:
-            self.fleet.update()
+            self.fleet.update(delta)
 
     def _check_fleet_edges(self) -> None:
         """

@@ -54,17 +54,17 @@ class ShipArsenal:
         )
         
     
-    def update_arsenal(self) -> None:
+    def update_arsenal(self, delta: float) -> None:
         """
         Updates the arsenal for each frame.
 
         Args:
-            None
+            delta: the amount of time that has passed since the last frame (seconds)
 
         Returns:
             None
         """
-        self.arsenal.update()
+        self.arsenal.update(delta)
         self._remove_bullets_offscreen()
         fleet = self.game.alien_fleet.fleet
         self._check_collisions(fleet, True, True)
