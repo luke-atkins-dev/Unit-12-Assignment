@@ -49,10 +49,18 @@ class Ship:
         self.moving_down = False
         self.arsenal = arsenal
 
-    def _center_ship(self):
+    def _center_ship(self) -> None:
+        """
+        Recenters the ship to the starting point
+
+        Args:
+            None
+        
+        Returns:
+            None
+        """
         self.rect.midleft = self.boundaries.midleft
         self.y = float(self.rect.y)
-        self.x = self.rect.x
     
     def draw(self) -> None:
         """
@@ -99,6 +107,7 @@ class Ship:
             self.y -= speed
         
         self.rect.y = self.y
+        self.x = self.rect.x
     
     def fire(self) -> bool:
         """
@@ -113,6 +122,15 @@ class Ship:
         return self.arsenal.fire_bullet()
 
     def check_collisions(self, other_group: Group):
+        """
+        Checks if ship collides with other sprite group
+
+        Args:
+            other_group: the sprite group to see if collides with ship
+
+        Returns:
+            bool: whether the two groups did collide
+        """
         did_collide = spritecollideany(self, other_group)
             
         if did_collide:
