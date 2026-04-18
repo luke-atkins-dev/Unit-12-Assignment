@@ -93,12 +93,30 @@ class AlienInvasion:
             self._check_collisions()
 
     def _check_collisions(self):
+        """
+        Checks whether the fleet has passed the player or an alien is colliding with the player
+
+        Args:
+            None
+
+        Returns:
+            None
+        """
         fleet_passed_player = self.alien_fleet.has_fleet_passed_player(self.ship)
         ship_hit_fleet = self.ship.check_collisions(self.alien_fleet.fleet)
         if ship_hit_fleet or fleet_passed_player:
             self._reset_level()
         
     def _reset_level(self):
+        """
+        Resets the game state
+
+        Args:
+            None
+
+        Returns:
+            None
+        """
         self.ship.arsenal.arsenal.empty()
         self.alien_fleet.fleet.empty()
         self.alien_fleet.create_fleet()
