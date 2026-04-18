@@ -33,23 +33,26 @@ class ShipArsenal:
         self.arsenal = pygame.sprite.Group()
         self.boundaries = game.screen.get_rect()
     
-    def _check_colliding_enemies(self) -> None:
+    def _check_collisions(self, other_group: pygame.sprite.Group, kill_bullets: bool, kill_other_group: bool) -> None:
         """
-        Checks if bullet sprite group collides with enemy sprite group and removes any bullet or enemy that does collide
+        Checks if bullet group collides with other sprite group
 
         Args:
-            None
+            other_group: the other group to check
+            kill_bullets: whether to remove bullets from the sprite group
+            kill_other_group: whether to remove the sprites from the other group
 
         Returns:
             None
         """
-        fleet = self.game.alien_fleet.fleet
-        pygame.sprite.groupcollide(
+        
+        return pygame.sprite.groupcollide(
             self.arsenal,
-            fleet,
-            True,
-            True
+            other_group,
+            kill_bullets,
+            kill_other_group
         )
+        
     
     def update_arsenal(self) -> None:
         """
@@ -63,7 +66,8 @@ class ShipArsenal:
         """
         self.arsenal.update()
         self._remove_bullets_offscreen()
-        self._check_colliding_enemies()
+        fleet = self.game.alien_fleet.fleet
+        self._check_collisions(fleet, True, True)
     
     def _remove_bullets_offscreen(self) -> None:
         """
