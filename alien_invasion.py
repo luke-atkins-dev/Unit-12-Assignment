@@ -54,7 +54,7 @@ class AlienInvasion:
         
         self.ship = Ship(self, ShipArsenal(self))
         self.alien_fleet = AlienFleet(self)
-        self.play_button = 
+        self.play_button = Button(self, "Play")
         
     def _update_screen(self) -> None:
         """
@@ -71,6 +71,7 @@ class AlienInvasion:
         self.screen.blit(self.bg, (0, 0))
         self.ship.draw()
         self.alien_fleet.draw()
+        self.play_button.draw()
         pygame.display.flip()
 
     def run(self) -> None:
