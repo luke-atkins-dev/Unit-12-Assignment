@@ -76,7 +76,7 @@ class AlienFleet():
 
     def _drop_alien_fleet(self):
         for alien in self.fleet:
-            alien.y += self.fleet_drop_speed
+            alien.x -= self.fleet_drop_speed
 
     def calculate_fleet_size(alien_w: float, screen_w: float, alien_h: float, screen_h: float) -> float:
         # in the video it makes this an instance method but it does not need to be
