@@ -54,6 +54,7 @@ class AlienInvasion:
         
         self.ship = Ship(self, ShipArsenal(self))
         self.alien_fleet = AlienFleet(self)
+        self.play_button = 
         
     def _update_screen(self) -> None:
         """

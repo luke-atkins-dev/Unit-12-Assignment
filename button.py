@@ -31,4 +31,4 @@ class Button:
         self.screen.blit(self.msg_image, self.msg_image_rect)
     
     def check_clicked(self, mouse_pos: tuple[int, int]):
-        
+        return self.rect.collidepoint(mouse_pos)
