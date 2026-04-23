@@ -57,6 +57,8 @@ class AlienInvasion:
         self.ship = Ship(self, ShipArsenal(self))
         self.alien_fleet = AlienFleet(self)
         self.play_button = Button(self, "Play")
+        self.impact_sound = pygame.mixer.Sound(self.settings.impact_sound)
+        self.impact_sound.set_volume(self.settings.impact_volume)
         
     def _update_screen(self) -> None:
         """
@@ -121,6 +123,17 @@ class AlienInvasion:
         ship_hit_fleet = self.ship.check_collisions(self.alien_fleet.fleet)
         if ship_hit_fleet or fleet_passed_player:
             self._reset_level()
+        
+        # check if fleet is destroyed
+        if self.alien_fleet.check_destroyed_status():
+            self._reset_level()
+            self.settings.increase_difficulty()
+        
+        # check if bullets collided with aliens
+        collisions = self.alien_fleet._check_collisions(self.ship.arsenal.arsenal, True, True)
+        if collisions:
+            self.impact_sound.play()
+            self.impact_sound.fadeout(500)
         
     def _reset_level(self) -> None:
         """

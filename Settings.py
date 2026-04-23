@@ -34,6 +34,9 @@ class Settings:
         self.laser_volume = 0.5
         self.bullet_speed = 200
 
+        self.impact_sound = project / "Assets" / "sound" / "impactSound.mp3"
+        self.impact_volume = 0.5
+
         self.alien_file = project / "Assets" / "images" / "enemy_4.png"
         self.alien_w = 40
         self.alien_h = 40
@@ -59,3 +62,6 @@ class Settings:
     
     def increase_difficulty(self):
         self.ship_speed *= self.difficulty_scale
+        self.bullet_speed *= self.difficulty_scale
+        self.fleet_speed *= self.difficulty_scale
+        

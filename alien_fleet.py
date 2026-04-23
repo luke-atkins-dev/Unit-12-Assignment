@@ -117,6 +117,26 @@ class AlienFleet():
         for alien in self.fleet:
             self.fleet.update(delta)
 
+    def _check_collisions(self, other_group: pygame.sprite.Group, kill_bullets: bool, kill_other_group: bool) -> None:
+        """
+        Checks if alien group collides with other sprite group
+
+        Args:
+            other_group: the other group to check
+            kill_bullets: whether to remove bullets from the sprite group
+            kill_other_group: whether to remove the sprites from the other group
+
+        Returns:
+            None
+        """
+        
+        return pygame.sprite.groupcollide(
+            self.fleet,
+            other_group,
+            kill_bullets,
+            kill_other_group
+        )
+
     def _check_fleet_edges(self) -> None:
         """
         Checks if any alien within the sprite group has collided with the edge of the screen
@@ -133,6 +153,9 @@ class AlienFleet():
                 self._drop_alien_fleet()
                 self.fleet_direction *= -1
                 break
+
+    def check_destroyed_status(self) -> bool:
+        return len(self.fleet) <= 0
 
     def has_fleet_passed_player(self, player: pygame.sprite.Sprite) -> bool:
         """

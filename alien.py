@@ -85,7 +85,7 @@ class Alien(Sprite):
     
     def draw_alien(self) -> None:
         """
-        Draws the bullet onto the screen
+        Draws the alien onto the screen
 
         Args:
             None
