@@ -13,6 +13,8 @@ from ship import Ship
 from arsenal import ShipArsenal
 from alien_fleet import AlienFleet
 from button import Button
+from game_stats import GameStats
+from time import sleep
 
 class AlienInvasion:
     '''
@@ -32,6 +34,7 @@ class AlienInvasion:
         """
         self.settings = Settings()
         self.settings.initialize_dynamic_settings()
+        self.game_stats = GameStats(self.settings.starting_ship_count)
 
         if not pygame.get_init():
             # No need to initialize pygame several times although this code will only be run once
@@ -136,7 +139,12 @@ class AlienInvasion:
             self.impact_sound.fadeout(500)
     
     def _check_game_status(self):
-        ...
+        if self.game_stats.ships_left > 0:
+            self.game_stats.ship_stats -= 1
+            self._reset_level()
+            sleep(0.5)
+        else:
+            self.game_active = False
     
     def _reset_level(self) -> None:
         """
