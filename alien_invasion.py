@@ -15,6 +15,7 @@ from alien_fleet import AlienFleet
 from button import Button
 from game_stats import GameStats
 from time import sleep
+from hud import HUD
 
 class AlienInvasion:
     '''
