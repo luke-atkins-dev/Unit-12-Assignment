@@ -46,6 +46,7 @@ class AlienInvasion:
             self.settings.resolution
         )
         pygame.display.set_caption(self.settings.name)
+        self.HUD = HUD(self)
 
         self.bg = pygame.image.load(self.settings.bg_file)
         self.bg = pygame.transform.scale(
@@ -80,6 +81,7 @@ class AlienInvasion:
         self.screen.blit(self.bg, (0, 0))
         self.ship.draw()
         self.alien_fleet.draw()
+        self.HUD.draw()
 
         if not self.game_active:
             self.play_button.draw()
@@ -138,6 +140,8 @@ class AlienInvasion:
         if collisions:
             self.impact_sound.play()
             self.impact_sound.fadeout(500)
+            self.game_stats.update(collisions)
+            self.HUD.update_scores()
     
     def _check_game_status(self):
         if self.game_stats.ships_left > 0:
@@ -188,6 +192,8 @@ class AlienInvasion:
         self.game_active = True
         pygame.mouse.set_visible(False)
         self._reset_level()
+        self.game_stats.reset_stats()
+        self.HUD.update_scores()
         self.ship._center_ship()
 
     def _check_button_clicked(self):

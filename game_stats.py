@@ -11,6 +11,7 @@ class GameStats:
         self.game = game
         self.settings = game.settings
         self.score = 0
+        self.max_score = 0
         self.level = 1
         self.init_saved_scores()
         self.reset_stats()

@@ -9,7 +9,7 @@ class HUD:
     def __init__(self, game: "AlienInvasion"):
         self.game = game
         self.settings = game.settings
-        self.screen = game.screenn
+        self.screen = game.screen
         self.boundaries = self.screen.get_rect()
         self.font = pygame.font.Font(
             self.settings.font_file,
@@ -19,12 +19,12 @@ class HUD:
         self.game_stats = game.game_stats
 
         self.update_scores()
-        self.setup_life_image()
-        self.update_level()
+        # self.setup_life_image()
+        # self.update_level()
     
     def update_scores(self):
+        self._update_max_score()
         self._update_score()
-        self._update_max_scores()
         self._update_hi_score()
     
     def _update_score(self):
