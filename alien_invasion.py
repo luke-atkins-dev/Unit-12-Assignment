@@ -134,7 +134,10 @@ class AlienInvasion:
         if collisions:
             self.impact_sound.play()
             self.impact_sound.fadeout(500)
-        
+    
+    def _check_game_status(self):
+        ...
+    
     def _reset_level(self) -> None:
         """
         Resets the game state
@@ -172,6 +175,7 @@ class AlienInvasion:
                 self._check_button_clicked()
 
     def restart_game(self):
+        self.settings.initialize_dynamic_settings()
         self.game_active = True
         pygame.mouse.set_visible(False)
         self._reset_level()
