@@ -50,6 +50,8 @@ class Settings:
         self.text_color = (255, 255, 255)
         self.HUD_font_size = 20
 
+        self.score_file = project / "Assets" / "file" / "scores.json"
+
     def initialize_dynamic_settings(self):
         self.fleet_speed = 1
         self.fleet_drop_speed = 40

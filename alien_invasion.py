@@ -34,7 +34,7 @@ class AlienInvasion:
         """
         self.settings = Settings()
         self.settings.initialize_dynamic_settings()
-        self.game_stats = GameStats(self.settings.starting_ship_count)
+        self.game_stats = GameStats(self)
 
         if not pygame.get_init():
             # No need to initialize pygame several times although this code will only be run once
