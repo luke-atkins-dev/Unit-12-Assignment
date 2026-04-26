@@ -106,7 +106,8 @@ class AlienInvasion:
             dt_ms = self.clock.tick(self.settings.FPS)
             # print(dt_ms)
             # this is done because the delta time is returned in milliseconds so we are converting to seconds
-            dt = dt_ms / 1000
+            # dt = dt_ms / 1000
+            dt = 0.025
             
             self._update_screen()
 

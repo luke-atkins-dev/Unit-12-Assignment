@@ -55,7 +55,7 @@ class Settings:
         
 
     def initialize_dynamic_settings(self):
-        self.fleet_speed = 1
+        self.fleet_speed = 0.03
         self.fleet_drop_speed = 40
         self.fleet_product = 0.65
         self.bullet_amount = 5

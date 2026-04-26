@@ -21,6 +21,8 @@ class AlienFleet():
         Returns:
             AlienFleet
         """
+        self.cou = False
+        self.i = 0
         self.game = game
         self.settings = game.settings
         self.screen = game.screen
@@ -222,7 +224,18 @@ class AlienFleet():
         Returns:
             None
         """
+        
         new_alien = Alien(self, current_x, current_y)
+
+        c = self.cou
+
+        self.i += 1
+
+        if self.i == 15:
+            print('set out')
+            self.cou = True
+            new_alien.mark()
+            new_alien.kill()
 
         self.fleet.add(new_alien)
     

@@ -6,7 +6,6 @@ Starter Code: No starter code used
 Date: 4/7/2026
 '''
 
-
 import pygame
 from pygame.sprite import Sprite
 from typing import TYPE_CHECKING
@@ -34,6 +33,8 @@ class Alien(Sprite):
         self.settings = alien_fleet.settings
         self.boundaries = alien_fleet.screen.get_rect()
 
+        self.is_out = False
+
         self.image = pygame.image.load(
             self.settings.alien_file
         )
@@ -53,10 +54,14 @@ class Alien(Sprite):
         self.x = float(self.rect.x)
         self.y = float(self.rect.y)
     
+    def mark(self):
+        self.is_out = True
+        print('alien has recieved') 
+
     def update(self, delta: float) -> None:
         """
         Updates the position of the alien
-
+    
         Args:
             delta: the amount of time that has passed since the last frame (seconds)
 
@@ -64,8 +69,12 @@ class Alien(Sprite):
             None
         """
         temp_speed = self.settings.fleet_speed
+        if self.is_out == True:
+            print('asdjsdfjusdgj')
 
-        self.y += temp_speed * self.fleet.fleet_direction * delta
+        if self.is_out:
+            print(f"{self.fleet.fleet_direction}")
+        self.y += (temp_speed * self.fleet.fleet_direction)
 
         self.rect.x = self.x
         self.rect.y = self.y
