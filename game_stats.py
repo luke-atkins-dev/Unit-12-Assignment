@@ -44,7 +44,6 @@ class GameStats:
         except FileNotFoundError as e:
             print(f"File not found: {e}")
 
-
     def reset_stats(self):
         self.level = 1
         self.score = 0
@@ -64,8 +63,8 @@ class GameStats:
             self.hi_score = self.score
     
     def _update_score(self, collisions: list):
-        for alien in collisions.values():
-            self.score += self.settings.alien_points
+        count = len(collisions.values())
+        self.score += (self.settings.alien_points * count)
         
     def update_level(self):
         self.level += 1

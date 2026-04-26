@@ -18,10 +18,10 @@ class HUD:
         self.padding = 20
         self.game_stats = game.game_stats
 
-        self.update_scores()
         self.setup_life_image()
-        # self.update_level()
-    
+        self.update_scores()
+        self.update_level()
+
     def setup_life_image(self):
         self.life_image = pygame.image.load(
             self.settings.ship_file
@@ -34,15 +34,33 @@ class HUD:
         self.life_rect = self.life_image.get_rect()
     
     def _draw_lives(self):
-        current_x = self.padding
         current_y = self.padding
         for i in range(self.game_stats.ships_left):
             self.screen.blit(self.life_image, ((self.life_rect.width + self.padding) * i, current_y))
+    
+    def update_level(self):
+        lvl_str = f"Level: {self.game_stats.level: ,.0f}"
+        self.level_image = self.font.render(
+            lvl_str,
+            True,
+            self.settings.text_color,
+            None
+        )
+        self.level_rect = self.level_image.get_rect()
+        self.level_rect.left = self.padding
+        self.level_rect.top = self.life_rect.bottom + self.padding
+
+    def _draw_level(self):
+        self.screen.blit(
+            self.level_image,
+            self.level_rect
+        )
 
     def update_scores(self):
         self._update_max_score()
         self._update_score()
         self._update_hi_score()
+        self.update_level()
     
     def _update_score(self):
         score_str = f"Score: {self.game_stats.score: ,.0f}"
@@ -85,3 +103,4 @@ class HUD:
         self.screen.blit(self.max_score_image, self.max_score_rect)
         self.screen.blit(self.score_image, self.score_rect)
         self._draw_lives()
+        self._draw_level()

@@ -128,11 +128,14 @@ class AlienInvasion:
         fleet_passed_player = self.alien_fleet.has_fleet_passed_player(self.ship)
         ship_hit_fleet = self.ship.check_collisions(self.alien_fleet.fleet)
         if ship_hit_fleet or fleet_passed_player:
+            self.game_stats.ships_left -= 1
             self._reset_level()
+            self._check_game_status()
         
         # check if fleet is destroyed
         if self.alien_fleet.check_destroyed_status():
             self._reset_level()
+            self.game_stats.update_level()
             self.settings.increase_difficulty()
         
         # check if bullets collided with aliens
@@ -145,9 +148,9 @@ class AlienInvasion:
     
     def _check_game_status(self):
         if self.game_stats.ships_left > 0:
-            self.game_stats.ship_stats -= 1
-            self._reset_level()
-            sleep(0.5)
+            # self._reset_level()
+            print('good')
+            # sleep(0.5)
         else:
             self.game_active = False
     
@@ -179,6 +182,7 @@ class AlienInvasion:
         """
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                self.game_stats.save_scores()
                 self.quit()
             elif event.type == pygame.KEYDOWN and self.game_active:
                 self._check_keydown_event(event)
