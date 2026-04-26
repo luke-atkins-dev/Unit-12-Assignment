@@ -135,7 +135,6 @@ class AlienInvasion:
         # check if fleet is destroyed
         if self.alien_fleet.check_destroyed_status():
             self._reset_level()
-            print('next level')
             self.game_stats.update_level()
             self.settings.increase_difficulty()
         
@@ -227,6 +226,7 @@ class AlienInvasion:
                 self.laser_sound.play()
                 self.laser_sound.fadeout(250)
         elif event.key == pygame.K_q:
+            self.game_stats.save_scores()
             self.quit()
 
     def _check_keyup_event(self, event) -> None:

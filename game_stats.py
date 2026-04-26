@@ -32,16 +32,15 @@ class GameStats:
         scores = {
             'hi_score': self.hi_score
         }
+        print('saving scores...')
         
         content = json.dumps(scores, indent=0)
-        # self.path.mkdir(parents=True, exist_ok=True) # have the wrong path and so I added this as a fail safe
+        
         if not self.path.exists():
             self.path.touch(exist_ok=True) # if file no exist
-
         try:
-            
-
             self.path.write_text(content)
+            print('saved')
         except FileNotFoundError as e:
             print(f"File not found: {e}")
 
@@ -62,6 +61,7 @@ class GameStats:
     def _update_hi_score(self):
         if self.score > self.hi_score:
             self.hi_score = self.score
+            print('update hi score')
     
     def _update_score(self, collisions: list):
         count = len(collisions.values())
