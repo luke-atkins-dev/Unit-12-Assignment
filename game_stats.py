@@ -34,8 +34,9 @@ class GameStats:
         }
         
         content = json.dumps(scores, indent=0)
-        self.path.mkdir(parents=True, exist_ok=True) # have the wrong path and so I added this as a fail safe
-        self.path.touch(exist_ok=True) # if file no exist
+        # self.path.mkdir(parents=True, exist_ok=True) # have the wrong path and so I added this as a fail safe
+        if not self.path.exists():
+            self.path.touch(exist_ok=True) # if file no exist
 
         try:
             

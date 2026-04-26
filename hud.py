@@ -60,7 +60,6 @@ class HUD:
         self._update_max_score()
         self._update_score()
         self._update_hi_score()
-        self.update_level()
     
     def _update_score(self):
         score_str = f"Score: {self.game_stats.score: ,.0f}"
@@ -102,5 +101,6 @@ class HUD:
         self.screen.blit(self.hi_score_image, self.hi_score_rect)
         self.screen.blit(self.max_score_image, self.max_score_rect)
         self.screen.blit(self.score_image, self.score_rect)
+        self.update_level()
         self._draw_lives()
         self._draw_level()
