@@ -21,8 +21,6 @@ class AlienFleet():
         Returns:
             AlienFleet
         """
-        self.cou = False
-        self.i = 0
         self.game = game
         self.settings = game.settings
         self.screen = game.screen
@@ -116,8 +114,8 @@ class AlienFleet():
 
         self._check_fleet_edges()
 
-        for alien in self.fleet:
-            self.fleet.update(delta)
+        self.fleet.update(delta)
+            
 
     def _check_collisions(self, other_group: pygame.sprite.Group, kill_bullets: bool, kill_other_group: bool) -> None:
         """
@@ -152,7 +150,7 @@ class AlienFleet():
         alien: "Alien"
         for alien in self.fleet:
             if alien.check_edges():
-                self._drop_alien_fleet()
+                # self._drop_alien_fleet()
                 self.fleet_direction *= -1
                 break
 
@@ -226,16 +224,6 @@ class AlienFleet():
         """
         
         new_alien = Alien(self, current_x, current_y)
-
-        c = self.cou
-
-        self.i += 1
-
-        if self.i == 15:
-            print('set out')
-            self.cou = True
-            new_alien.mark()
-            new_alien.kill()
 
         self.fleet.add(new_alien)
     

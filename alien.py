@@ -33,8 +33,6 @@ class Alien(Sprite):
         self.settings = alien_fleet.settings
         self.boundaries = alien_fleet.screen.get_rect()
 
-        self.is_out = False
-
         self.image = pygame.image.load(
             self.settings.alien_file
         )
@@ -53,10 +51,6 @@ class Alien(Sprite):
 
         self.x = float(self.rect.x)
         self.y = float(self.rect.y)
-    
-    def mark(self):
-        self.is_out = True
-        print('alien has recieved') 
 
     def update(self, delta: float) -> None:
         """
@@ -69,12 +63,8 @@ class Alien(Sprite):
             None
         """
         temp_speed = self.settings.fleet_speed
-        if self.is_out == True:
-            print('asdjsdfjusdgj')
 
-        if self.is_out:
-            print(f"{self.fleet.fleet_direction}")
-        self.y += (temp_speed * self.fleet.fleet_direction)
+        self.y += (temp_speed * self.fleet.fleet_direction) * delta
 
         self.rect.x = self.x
         self.rect.y = self.y
