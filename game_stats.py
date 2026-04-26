@@ -13,6 +13,7 @@ class GameStats:
         self.score = 0
         self.max_score = 0
         self.level = 1
+        self.ships_left = 0
         self.init_saved_scores()
         self.reset_stats()
     
