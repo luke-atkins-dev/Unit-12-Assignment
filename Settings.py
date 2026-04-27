@@ -58,7 +58,7 @@ class Settings:
         self.fleet_speed = 60
         self.fleet_drop_speed = 40
         self.fleet_product = 0.65
-        self.bullet_amount = 205
+        self.bullet_amount = 5
         self.ship_speed = 200
         self.bullet_w = 25
         self.bullet_h = 80

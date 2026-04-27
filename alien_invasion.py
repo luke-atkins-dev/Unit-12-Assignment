@@ -147,12 +147,13 @@ class AlienInvasion:
             self.HUD.update_scores()
     
     def _check_game_status(self):
-        if self.game_stats.ships_left > 0:
-            # self._reset_level()
-            print('good')
-            # sleep(0.5)
-        else:
+        if self.game_stats.ships_left <= 0:
+            pygame.mouse.set_visible(True)
             self.game_active = False
+            self.game_stats.reset_stats()
+            # self._reset_level()
+            # print('good')
+            sleep(0.5)
     
     def _reset_level(self) -> None:
         """
