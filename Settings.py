@@ -52,8 +52,6 @@ class Settings:
 
         self.score_file = project / "Assets" / "file" / "scores.json"
 
-        
-
     def initialize_dynamic_settings(self):
         self.fleet_speed = 60
         self.fleet_drop_speed = 40
